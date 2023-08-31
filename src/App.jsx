@@ -56,17 +56,17 @@ function App() {
   });
 
   return (
-    <div className="container">
+    <div className="container shadow-lg p-3 rounded">
       <h1>Lista de Colaboradores</h1>
+      <Buscador onBuscar={handleBuscar} />
       <div className="row">
-        <div className="col-md-9">
-          <Buscador onBuscar={handleBuscar} />
+        <div className="col-lg-8 col-md-12">
           <Listado
             colaboradores={colaboradoresFiltrados}
             onEliminarColaborador={handleEliminarColaborador}
           />
         </div>
-        <div className="col-md-3">
+        <div className="col-lg-4 col-md-12 d-flex flex-column align-items-center">
           <Formulario
             onAgregarColaborador={handleAgregarColaborador}
             setAlert={setAlert}

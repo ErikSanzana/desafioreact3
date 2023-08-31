@@ -11,7 +11,7 @@ function Buscador({ onBuscar }) {
   };
 
   return (
-    <div className="mb-3">
+    <div className="mb-3 shadow-lg rounded">
 {/*       <label htmlFor="busqueda" className="form-label">
         Buscar Colaborador
       </label> */}

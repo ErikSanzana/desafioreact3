@@ -46,10 +46,10 @@ function Formulario({ onAgregarColaborador, setAlert }) {
   /* alerta error */
 
   return (
-    <div className="container">
-      <h2>Agregar Colaborador</h2>
+    <div className="container shadow-lg pb-3 rounded">
+      <h2 className="p-2">Agregar Colaborador</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="d-flex flex-column">
         <div className="mb-3">
           <input
             type="text"

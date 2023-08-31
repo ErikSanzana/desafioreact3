@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Alert({ color, msg }) {
   return (
-    <div className={`alert alert-${color}`} role="alert">
+    <div className={`alert alert-${color} mt-3`} role="alert">
       {msg}
     </div>
   );

@@ -1,12 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import Table from "react-bootstrap/Table"
 
 function Listado({ colaboradores, onEliminarColaborador }) {
   return (
-    <div className="container">
-      <div className="table-responsive">
-        <table className="table table-bordered">
+    <div className="container shadow-lg pt-3 rounded table-responsive">
+        <Table striped bordered hover responsive="md">
           <thead>
             <tr>
               <th>ID</th>
@@ -45,8 +44,7 @@ utilizando una tabla de Bootstrap.
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+        </Table>
     </div>
   );
 }
