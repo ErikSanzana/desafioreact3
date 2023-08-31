@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Alert({ type, message }) {
+function Alert({ color, msg }) {
   return (
-    <div className={`alert alert-${type}`} role="alert">
-      {message}
+    <div className={`alert alert-${color}`} role="alert">
+      {msg}
     </div>
   );
 }

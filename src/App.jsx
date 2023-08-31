@@ -8,10 +8,16 @@ import { BaseColaboradores } from "./components/BaseColaboradores";
 import Buscador from "./components/Buscador";
 
 function App() {
-  const [mensaje, setMensaje] = useState("");
-  const [alertType, setAlertType] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const [colaboradores, setColaboradores] = useState(BaseColaboradores);
+
+  // El estado de alert es un objeto que tiene tres propiedades: error, msg y color.
+  // Estas propiedades se utilizan para mostrar mensajes de alerta en la interfaz de usuario.
+  const [alert, setAlert] = useState({
+    error: "",
+    msg: "",
+    color: ""
+  });
 
   const handleAgregarColaborador = (nuevoColaborador) => {
     if (
@@ -25,11 +31,6 @@ function App() {
       const nuevaId = ultimaId + 1;
       
       setColaboradores([...colaboradores, { ...nuevoColaborador, id: nuevaId }]);
-      setMensaje("Colaborador agregado exitosamente");
-      setAlertType("success");
-    } else {
-      setMensaje("Por favor, complete todos los campos.");
-      setAlertType("danger");
     }
   };
 
@@ -68,9 +69,9 @@ function App() {
         <div className="col-md-3">
           <Formulario
             onAgregarColaborador={handleAgregarColaborador}
-            mensaje={mensaje}
-            alertType={alertType}
+            setAlert={setAlert}
           />
+          {alert.msg && <Alert msg={alert.msg} color={alert.color} />}
         </div>
       </div>
     </div>
