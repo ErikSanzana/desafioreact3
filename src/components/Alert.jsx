@@ -1,18 +1,17 @@
-import React from 'react'; // Importa la biblioteca React
-import PropTypes from 'prop-types'; // Importa PropTypes para definir tipos de propiedades
+import React from "react";
+import PropTypes from "prop-types";
 
-function Alert({ type, message }) { // Define un componente funcional llamado Alert que toma dos propiedades: type y message
+function Alert({ type, message }) {
   return (
-    <div className={`alert alert-${type}`} role="alert"> {/* Crea un contenedor de alerta con la clase CSS basada en el tipo */}
-      {message} {/* Renderiza el mensaje proporcionado */}
+    <div className={`alert alert-${type}`} role="alert">
+      {message}
     </div>
   );
 }
 
 Alert.propTypes = {
-  type: PropTypes.oneOf(['success', 'danger']).isRequired, // Define el tipo de propiedad "type" como uno de los valores permitidos: 'success' o 'danger'
-  message: PropTypes.string.isRequired, // Define el tipo de propiedad "message" como una cadena requerida
+  type: PropTypes.oneOf(["success", "danger", "null"]).isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 export default Alert;
-/* Exporta el componente Alert como el componente predeterminado */ 

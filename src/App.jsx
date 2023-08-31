@@ -1,41 +1,76 @@
-import { useState } from 'react'; // Importa el hook useState de React
-import reactLogo from './assets/react.svg'; // Importa una imagen de logo de React
-import viteLogo from '/vite.svg'; // Importa una imagen de logo de Vite
-import './App.css'; // Importa el archivo CSS para estilos específicos de la aplicación
-import Listado from './components/Listado'; // Importa el componente Listado
-import Formulario from './components/Formulario'; // Importa el componente Formulario
-import Buscador from './components/Buscador'; // Importa el componente Buscador
-import Alert from './components/Alert'; // Importa el componente Alert
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos CSS de Bootstrap
+import React, { useState } from "react";
+import "./App.css";
+import Listado from "./components/Listado";
+import Formulario from "./components/Formulario";
+import Alert from "./components/Alert";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BaseColaboradores } from "./components/BaseColaboradores";
+import Buscador from "./components/Buscador";
 
 function App() {
- /* Define los estados de mensaje y tipo de alerta utilizando el hook useState */
-  const [mensaje, setMensaje] = useState('');
-  const [alertType, setAlertType] = useState('');
+  const [mensaje, setMensaje] = useState("");
+  const [alertType, setAlertType] = useState("");
+  const [busqueda, setBusqueda] = useState("");
+  const [colaboradores, setColaboradores] = useState(BaseColaboradores);
 
- /* Define una función de manejo para agregar colaboradores */
   const handleAgregarColaborador = (nuevoColaborador) => {
-    /* Establece el mensaje y el tipo de alerta al agregar un colaborador exitosamente */
-    setMensaje('Colaborador agregado exitosamente');
-    setAlertType('success');
+    if (
+      nuevoColaborador.nombre &&
+      nuevoColaborador.correo &&
+      nuevoColaborador.edad &&
+      nuevoColaborador.cargo &&
+      nuevoColaborador.telefono
+    ) {
+      const ultimaId = colaboradores.length > 0 ? parseInt(colaboradores[colaboradores.length - 1].id) : 0;
+      const nuevaId = ultimaId + 1;
+      
+      setColaboradores([...colaboradores, { ...nuevoColaborador, id: nuevaId }]);
+      setMensaje("Colaborador agregado exitosamente");
+      setAlertType("success");
+    } else {
+      setMensaje("Por favor, complete todos los campos.");
+      setAlertType("danger");
+    }
   };
 
-/* El componente App devuelve la estructura de la interfaz de usuario */
+  const handleBuscar = (valorBusqueda) => {
+    setBusqueda(valorBusqueda);
+  };
+
+  const handleEliminarColaborador = (colaboradorId) => {
+    const nuevosColaboradores = colaboradores.filter(
+      (colaborador) => colaborador.id !== colaboradorId
+    );
+    setColaboradores(nuevosColaboradores);
+  };
+
+  const colaboradoresFiltrados = colaboradores.filter((colaborador) => {
+    return (
+      colaborador.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      colaborador.correo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      colaborador.edad.toString().includes(busqueda) ||
+      colaborador.cargo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      colaborador.telefono.includes(busqueda)
+    );
+  });
+
   return (
     <div className="container">
       <h1>Lista de Colaboradores</h1>
-      
-      {/* Renderiza el componente Alert si hay un mensaje */}
-      {mensaje && <Alert type={alertType} message={mensaje} />}
-      
       <div className="row">
         <div className="col-md-9">
-          <Listado /> 
-          {/* Renderiza el componente Listado */}
+          <Buscador onBuscar={handleBuscar} />
+          <Listado
+            colaboradores={colaboradoresFiltrados}
+            onEliminarColaborador={handleEliminarColaborador}
+          />
         </div>
         <div className="col-md-3">
-          <Formulario onAgregarColaborador={handleAgregarColaborador} /> 
-          {/* Renderiza el componente Formulario */}
+          <Formulario
+            onAgregarColaborador={handleAgregarColaborador}
+            mensaje={mensaje}
+            alertType={alertType}
+          />
         </div>
       </div>
     </div>
@@ -43,4 +78,3 @@ function App() {
 }
 
 export default App;
-/* Exporta el componente App como el componente principal de la aplicación */

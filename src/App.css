@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+.table-bordered {
+  border: 1px solid #dee2e6; /* Agrega bordes a la tabla */
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6; /* Agrega bordes a las celdas */
+  padding: 8px; /* Agrega espacio interno a las celdas */
+}
