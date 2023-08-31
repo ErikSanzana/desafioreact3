@@ -10,8 +10,8 @@ function Alert({ color, msg }) {
 }
 
 Alert.propTypes = {
-  type: PropTypes.oneOf(["success", "danger", "null"]).isRequired,
-  message: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["success", "danger", "undefined"]),
+  message: PropTypes.string,
 };
 
 export default Alert;
